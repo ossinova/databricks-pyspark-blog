@@ -1,6 +1,6 @@
 # Databricks notebook source
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC # Does this work
 
 # COMMAND ----------
@@ -20,11 +20,11 @@ def is_unique(s):
 # COMMAND ----------
 
 # MAGIC %sql
-# MAGIC 
+# MAGIC
 # MAGIC SELECT * FROM a
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 
+# MAGIC
 # MAGIC # NICE
