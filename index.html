@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Quinn</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link href="assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Quinn
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quinn-helper-functions">Quinn Helper Functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#dataframe-validations">DataFrame Validations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#transformations">Transformations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dataframe-helpers">DataFrame Helpers</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pyspark-core-class-extensions">Pyspark Core Class Extensions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sparksession-extensions">SparkSession Extensions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#column-extensions">Column Extensions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#contributing">Contributing</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#code-style">Code Style</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="reference/SUMMARY/">API Docs</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Quinn</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="test">TEST</h1>
+<p><img alt="![image](https://github.com/MrPowers/quinn/workflows/build/badge.svg)" src="https://github.com/MrPowers/quinn/actions/workflows/ci.yml/badge.svg" />
+<img alt="![image](https://github.com/MrPowers/mack/workflows/build/badge.svg)" src="https://github.com/MrPowers/quinn/actions/workflows/flake8.yml/badge.svg" />
+<img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/quinn" />
+<a href="https://badge.fury.io/py/quinn"><img alt="PyPI version" src="https://badge.fury.io/py/quinn.svg" /></a></p>
+<p>Pyspark helper methods to maximize developer productivity.</p>
+<p>Quinn provides DataFrame validation functions, useful column functions / DataFrame transformations, and performant helper functions.</p>
+<p><img alt="quinn" src="https://github.com/MrPowers/quinn/raw/master/quinn.png" /></p>
+<h2 id="setup">Setup</h2>
+<p>Quinn is <a href="https://pypi.org/project/quinn/">uploaded to PyPi</a> and can be installed with this command:</p>
+<pre><code>pip install quinn
+</code></pre>
+<h2 id="quinn-helper-functions">Quinn Helper Functions</h2>
+<pre><code class="language-python">import quinn
+</code></pre>
+<h3 id="dataframe-validations">DataFrame Validations</h3>
+<p><strong>validate_presence_of_columns()</strong></p>
+<pre><code class="language-python">quinn.validate_presence_of_columns(source_df, [&quot;name&quot;, &quot;age&quot;, &quot;fun&quot;])
+</code></pre>
+<p>Raises an exception unless <code>source_df</code> contains the <code>name</code>, <code>age</code>, and <code>fun</code> column.</p>
+<p><strong>validate_schema()</strong></p>
+<pre><code class="language-python">quinn.validate_schema(source_df, required_schema)
+</code></pre>
+<p>Raises an exception unless <code>source_df</code> contains all the <code>StructFields</code> defined in the <code>required_schema</code>.</p>
+<p><strong>validate_absence_of_columns()</strong></p>
+<pre><code class="language-python">quinn.validate_absence_of_columns(source_df, [&quot;age&quot;, &quot;cool&quot;])
+</code></pre>
+<p>Raises an exception if <code>source_df</code> contains <code>age</code> or <code>cool</code> columns.</p>
+<h3 id="functions">Functions</h3>
+<p><strong>single_space()</strong></p>
+<pre><code class="language-python">actual_df = source_df.withColumn(
+    &quot;words_single_spaced&quot;,
+    quinn.single_space(col(&quot;words&quot;))
+)
+</code></pre>
+<p>Replaces all multispaces with single spaces (e.g. changes <code>"this has   some"</code> to <code>"this has some"</code>.</p>
+<p><strong>remove_all_whitespace()</strong></p>
+<pre><code class="language-python">actual_df = source_df.withColumn(
+    &quot;words_without_whitespace&quot;,
+    quinn.remove_all_whitespace(col(&quot;words&quot;))
+)
+</code></pre>
+<p>Removes all whitespace in a string (e.g. changes <code>"this has some"</code> to <code>"thishassome"</code>.</p>
+<p><strong>anti_trim()</strong></p>
+<pre><code class="language-python">actual_df = source_df.withColumn(
+    &quot;words_anti_trimmed&quot;,
+    quinn.anti_trim(col(&quot;words&quot;))
+)
+</code></pre>
+<p>Removes all inner whitespace, but doesn't delete leading or trailing whitespace (e.g. changes <code>" this has some "</code> to <code>" thishassome "</code>.</p>
+<p><strong>remove_non_word_characters()</strong></p>
+<pre><code class="language-python">actual_df = source_df.withColumn(
+    &quot;words_without_nonword_chars&quot;,
+    quinn.remove_non_word_characters(col(&quot;words&quot;))
+)
+</code></pre>
+<p>Removes all non-word characters from a string (e.g. changes <code>"si%$#@!#$!@#mpsons"</code> to <code>"simpsons"</code>.</p>
+<p><strong>multi_equals()</strong></p>
+<pre><code class="language-python">source_df.withColumn(
+    &quot;are_s1_and_s2_cat&quot;,
+    quinn.multi_equals(&quot;cat&quot;)(col(&quot;s1&quot;), col(&quot;s2&quot;))
+)
+</code></pre>
+<p><code>multi_equals</code> returns true if <code>s1</code> and <code>s2</code> are both equal to <code>"cat"</code>.</p>
+<p><strong>approx_equal()</strong></p>
+<p>This function takes 3 arguments which are 2 Pyspark DataFrames and one integer values as threshold, and returns the Boolean column which tells if the columns are equal in the threshold.</p>
+<pre><code>let the columns be
+col1 = [1.2, 2.5, 3.1, 4.0, 5.5]
+col2 = [1.3, 2.3, 3.0, 3.9, 5.6]
+threshold = 0.2
+
+result = approx_equal(col(&quot;col1&quot;), col(&quot;col2&quot;), threshold)
+result.show()
+
++-----+
+|value|
++-----+
+| true|
+|false|
+| true|
+| true|
+| true|
++-----+
+</code></pre>
+<p><strong>array_choice()</strong></p>
+<p>This function takes a Column as a parameter and returns a PySpark column that contains a random value from the input column parameter</p>
+<pre><code>df = spark.createDataFrame([(1,), (2,), (3,), (4,), (5,)], [&quot;values&quot;])
+result = df.select(array_choice(col(&quot;values&quot;)))
+
+The output is :=
++--------------+
+|array_choice()|
++--------------+
+|             2|
++--------------+
+
+</code></pre>
+<p><strong>regexp_extract_all()</strong></p>
+<p>The regexp_extract_all takes 2 parameters String <code>s</code> and <code>regexp</code> which is a regular expression. This function finds all the matches for the string which satisfies the regular expression.</p>
+<pre><code>print(regexp_extract_all(&quot;this is a example text message for testing application&quot;,r&quot;\b\w*a\w*\b&quot;))
+
+The output is :=
+['a', 'example', 'message', 'application']
+
+</code></pre>
+<p>Where <code>r"\b\w*a\w*\b"</code> pattern checks for words containing letter <code>a</code></p>
+<p><strong>week_start_date()</strong></p>
+<p>It takes 2 parameters, column and week_start_day. It returns a Spark Dataframe column which contains the start date of the week. By default the week_start_day is set to "Sun".</p>
+<p>For input <code>["2023-03-05", "2023-03-06", "2023-03-07", "2023-03-08"]</code> the Output is</p>
+<pre><code>result = df.select(&quot;date&quot;, week_start_date(col(&quot;date&quot;), &quot;Sun&quot;))
+result.show()
++----------+----------------+
+|      date|week_start_date |
++----------+----------------+
+|2023-03-05|      2023-03-05|
+|2023-03-07|      2023-03-05|
+|2023-03-08|      2023-03-05|
++----------+----------------+
+</code></pre>
+<p><strong>week_end_date()</strong></p>
+<p>It also takes 2 Paramters as Column and week_end_day, and returns the dateframe column which contains the end date of the week. By default the week_end_day is set to "sat"</p>
+<pre><code>+---------+-------------+
+      date|week_end_date|
++---------+-------------+
+2023-03-05|   2023-03-05|
+2023-03-07|   2023-03-12|
+2023-03-08|   2023-03-12|
++---------+-------------+
+
+</code></pre>
+<p><strong>uuid5()</strong></p>
+<p>This function generates UUIDv5 in string form from the passed column and optionally namespace and optional extra salt.
+By default namespace is NAMESPACE_DNS UUID and no extra string used to reduce hash collisions.</p>
+<pre><code>
+df = spark.createDataFrame([(&quot;lorem&quot;,), (&quot;ipsum&quot;,)], [&quot;values&quot;])
+result = df.select(quinn.uuid5(F.col(&quot;values&quot;)).alias(&quot;uuid5&quot;))
+result.show(truncate=False)
+
+The output is :=
++------------------------------------+
+|uuid5                               |
++------------------------------------+
+|35482fda-c10a-5076-8da2-dc7bf22d6be4|
+|51b79c1d-d06c-5b30-a5c6-1fadcd3b2103|
++------------------------------------+
+
+</code></pre>
+<h3 id="transformations">Transformations</h3>
+<p><strong>snake_case_col_names()</strong></p>
+<pre><code class="language-python">quinn.snake_case_col_names(source_df)
+</code></pre>
+<p>Converts all the column names in a DataFrame to snake_case. It's annoying to write SQL queries when columns aren't snake cased.</p>
+<p><strong>sort_columns()</strong></p>
+<pre><code class="language-python">quinn.sort_columns(source_df, &quot;asc&quot;)
+</code></pre>
+<p>Sorts the DataFrame columns in alphabetical order. Wide DataFrames are easier to navigate when they're sorted alphabetically.</p>
+<h3 id="dataframe-helpers">DataFrame Helpers</h3>
+<p><strong>column_to_list()</strong></p>
+<pre><code class="language-python">quinn.column_to_list(source_df, &quot;name&quot;)
+</code></pre>
+<p>Converts a column in a DataFrame to a list of values.</p>
+<p><strong>two_columns_to_dictionary()</strong></p>
+<pre><code class="language-python">quinn.two_columns_to_dictionary(source_df, &quot;name&quot;, &quot;age&quot;)
+</code></pre>
+<p>Converts two columns of a DataFrame into a dictionary. In this example, <code>name</code> is the key and <code>age</code> is the value.</p>
+<p><strong>to_list_of_dictionaries()</strong></p>
+<pre><code class="language-python">quinn.to_list_of_dictionaries(source_df)
+</code></pre>
+<p>Converts an entire DataFrame into a list of dictionaries.</p>
+<h2 id="pyspark-core-class-extensions">Pyspark Core Class Extensions</h2>
+<pre><code>from quinn.extensions import *
+</code></pre>
+<h3 id="sparksession-extensions">SparkSession Extensions</h3>
+<p><strong>create_df()</strong></p>
+<pre><code class="language-python">spark.create_df(
+    [(&quot;jose&quot;, &quot;a&quot;), (&quot;li&quot;, &quot;b&quot;), (&quot;sam&quot;, &quot;c&quot;)],
+    [(&quot;name&quot;, StringType(), True), (&quot;blah&quot;, StringType(), True)]
+)
+</code></pre>
+<p>Creates DataFrame with a syntax that's less verbose than the built-in <code>createDataFrame</code> method.</p>
+<h3 id="column-extensions">Column Extensions</h3>
+<p><strong>isFalsy()</strong></p>
+<pre><code class="language-python">source_df.withColumn(&quot;is_stuff_falsy&quot;, F.col(&quot;has_stuff&quot;).isFalsy())
+</code></pre>
+<p>Returns <code>True</code> if <code>has_stuff</code> is <code>None</code> or <code>False</code>.</p>
+<p><strong>isTruthy()</strong></p>
+<pre><code class="language-python">source_df.withColumn(&quot;is_stuff_truthy&quot;, F.col(&quot;has_stuff&quot;).isTruthy())
+</code></pre>
+<p>Returns <code>True</code> unless <code>has_stuff</code> is <code>None</code> or <code>False</code>.</p>
+<p><strong>isNullOrBlank()</strong></p>
+<pre><code class="language-python">source_df.withColumn(&quot;is_blah_null_or_blank&quot;, F.col(&quot;blah&quot;).isNullOrBlank())
+</code></pre>
+<p>Returns <code>True</code> if <code>blah</code> is <code>null</code> or blank (the empty string or a string that only contains whitespace).</p>
+<p><strong>isNotIn()</strong></p>
+<pre><code class="language-python">source_df.withColumn(&quot;is_not_bobs_hobby&quot;, F.col(&quot;fun_thing&quot;).isNotIn(bobs_hobbies))
+</code></pre>
+<p>Returns <code>True</code> if <code>fun_thing</code> is not included in the <code>bobs_hobbies</code> list.</p>
+<p><strong>nullBetween()</strong></p>
+<pre><code class="language-python">source_df.withColumn(&quot;is_between&quot;, F.col(&quot;age&quot;).nullBetween(F.col(&quot;lower_age&quot;), F.col(&quot;upper_age&quot;)))
+</code></pre>
+<p>Returns <code>True</code> if <code>age</code> is between <code>lower_age</code> and <code>upper_age</code>. If <code>lower_age</code> is populated and <code>upper_age</code> is <code>null</code>, it will return <code>True</code> if <code>age</code> is greater than or equal to <code>lower_age</code>. If <code>lower_age</code> is <code>null</code> and <code>upper_age</code> is populate, it will return <code>True</code> if <code>age</code> is lower than or equal to <code>upper_age</code>.</p>
+<h2 id="contributing">Contributing</h2>
+<p>We are actively looking for feature requests, pull requests, and bug fixes.</p>
+<p>Any developer that demonstrates excellence will be invited to be a maintainer of the project.</p>
+<h3 id="code-style">Code Style</h3>
+<p>We are using <a href="https://github.com/MrPowers/spark-style-guide/blob/main/PYSPARK_STYLE_GUIDE.md">PySpark code-style</a> and <code>sphinx</code> as docstrings format. For more details about <code>sphinx</code> format see <a href="https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html">this tutorial</a>. A short example of <code>sphinx</code>-formated docstring is placed below:</p>
+<pre><code class="language-python">&quot;&quot;&quot;[Summary]
+
+:param [ParamName]: [ParamDescription], defaults to [DefaultParamVal]
+:type [ParamName]: [ParamType](, optional)
+...
+:raises [ErrorType]: [ErrorDescription]
+...
+:return: [ReturnDescription]
+:rtype: [ReturnType]
+&quot;&quot;&quot;
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="reference/SUMMARY/" class="btn btn-neutral float-right" title="API Docs">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="reference/SUMMARY/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.4.3
+Build Date UTC : 2023-05-16 15:52:21.890394+00:00
+-->

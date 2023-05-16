@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Dataframe operations - Quinn</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link href="../../../assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Dataframe operations";
+        var mkdocs_page_input_path = "reference/Functions/dataframe_operations.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Quinn
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../SUMMARY/">API Docs</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Quinn</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a> &raquo;</li>
+      <li>Dataframe operations</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div class="doc doc-object doc-module">
+
+
+<a id="Functions.dataframe_operations"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="Functions.dataframe_operations.column_to_list" class="doc doc-heading">
+<code class="highlight language-python">column_to_list(df, col_name)</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Collect column to list of values.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>df</code></td>
+          <td>
+                <code><span title="pyspark.sql.DataFrame">DataFrame</span></code>
+          </td>
+          <td><p>Input DataFrame</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>col_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Column to collect</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>List[Any]</code>
+          </td>
+          <td><p>List of values</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>Functions/dataframe_operations.py</code></summary>
+        <pre class="highlight"><code class="language-python">def column_to_list(df: DataFrame, col_name: str) -&gt; List[Any]:
+    """Collect column to list of values.
+
+    :param df: Input DataFrame
+    :type df: pyspark.sql.DataFrame
+    :param col_name: Column to collect
+    :type col_name: str
+    :return: List of values
+    :rtype: List[Any]
+    """
+    return [x[col_name] for x in df.select(col_name).collect()]</code></pre>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="Functions.dataframe_operations.print_athena_create_table" class="doc doc-heading">
+<code class="highlight language-python">print_athena_create_table(df, athena_table_name, s3location)</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Generates the Athena create table statement for a given DataFrame</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>df</code></td>
+          <td>
+                <code><span title="pyspark.sql.DataFrame">DataFrame</span></code>
+          </td>
+          <td><p>The pyspark.sql.DataFrame to use</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>athena_table_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>The name of the athena table to generate</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>s3location</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>The S3 location of the parquet data</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>None</code>
+          </td>
+          <td><p>None</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>Functions/dataframe_operations.py</code></summary>
+        <pre class="highlight"><code class="language-python">def print_athena_create_table(
+    df: DataFrame, athena_table_name: str, s3location: str
+) -&gt; None:
+    """Generates the Athena create table statement for a given DataFrame
+
+    :param df: The pyspark.sql.DataFrame to use
+    :param athena_table_name: The name of the athena table to generate
+    :param s3location: The S3 location of the parquet data
+    :return: None
+    """
+    fields = df.schema
+
+    print(f"CREATE EXTERNAL TABLE IF NOT EXISTS `{athena_table_name}` ( ")
+
+    for field in fields.fieldNames()[:-1]:
+        print("\t", f"`{fields[field].name}` {fields[field].dataType.simpleString()}, ")
+    last = fields[fields.fieldNames()[-1]]
+    print("\t", f"`{last.name}` {last.dataType.simpleString()} ")
+
+    print(")")
+    print("STORED AS PARQUET")
+    print(f"LOCATION '{s3location}'\n")</code></pre>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="Functions.dataframe_operations.show_output_to_df" class="doc doc-heading">
+<code class="highlight language-python">show_output_to_df(show_output, spark)</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Show output as spark DataFrame</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>show_output</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>String representing output of 'show' command in spark</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>spark</code></td>
+          <td>
+                <code><span title="pyspark.sql.SparkSession">SparkSession</span></code>
+          </td>
+          <td><p>SparkSession object</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>Dataframe</code>
+          </td>
+          <td><p>DataFrame object containing output of a show command in spark</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>Functions/dataframe_operations.py</code></summary>
+        <pre class="highlight"><code class="language-python">def show_output_to_df(show_output: str, spark: SparkSession) -&gt; DataFrame:
+    """Show output as spark DataFrame
+
+    :param show_output: String representing output of 'show' command in spark
+    :type show_output: str
+    :param spark: SparkSession object
+    :type spark: SparkSession
+    :return: DataFrame object containing output of a show command in spark
+    :rtype: Dataframe
+    """
+    l = show_output.split("\n")
+    ugly_column_names = l[1]
+    pretty_column_names = [i.strip() for i in ugly_column_names[1:-1].split("|")]
+    pretty_data = []
+    ugly_data = l[3:-1]
+    for row in ugly_data:
+        r = [i.strip() for i in row[1:-1].split("|")]
+        pretty_data.append(tuple(r))
+    return spark.createDataFrame(pretty_data, pretty_column_names)</code></pre>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="Functions.dataframe_operations.to_list_of_dictionaries" class="doc doc-heading">
+<code class="highlight language-python">to_list_of_dictionaries(df)</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert a Spark DataFrame to a list of dictionaries.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>df</code></td>
+          <td>
+                <code><span title="pyspark.sql.DataFrame">DataFrame</span></code>
+          </td>
+          <td><p>The Spark DataFrame to convert.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>List[Dict[str, Any]]</code>
+          </td>
+          <td><p>A list of dictionaries representing the rows in the DataFrame.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>Functions/dataframe_operations.py</code></summary>
+        <pre class="highlight"><code class="language-python">def to_list_of_dictionaries(df: DataFrame) -&gt; List[Dict[str, Any]]:
+    """Convert a Spark DataFrame to a list of dictionaries.
+
+    :param df: The Spark DataFrame to convert.
+    :type df: :py:class:`pyspark.sql.DataFrame`
+    :return: A list of dictionaries representing the rows in the DataFrame.
+    :rtype: List[Dict[str, Any]]
+    """
+    return list(map(lambda r: r.asDict(), df.collect()))</code></pre>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="Functions.dataframe_operations.two_columns_to_dictionary" class="doc doc-heading">
+<code class="highlight language-python">two_columns_to_dictionary(df, key_col_name, value_col_name)</code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Collect two columns as dictionary when first column is key and second is value.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>df</code></td>
+          <td>
+                <code><span title="pyspark.sql.DataFrame">DataFrame</span></code>
+          </td>
+          <td><p>Input DataFrame</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>key_col_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Key-column</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>value_col_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Value-column</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>Dict[str, Any]</code>
+          </td>
+          <td><p>Dictionary with values</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>Functions/dataframe_operations.py</code></summary>
+        <pre class="highlight"><code class="language-python">def two_columns_to_dictionary(
+    df: DataFrame, key_col_name: str, value_col_name: str
+) -&gt; Dict[str, Any]:
+    """Collect two columns as dictionary when first column is key and second is value.
+
+    :param df: Input DataFrame
+    :type df: pyspark.sql.DataFrame
+    :param key_col_name: Key-column
+    :type key_col_name: str
+    :param value_col_name: Value-column
+    :type value_col_name: str
+    :return: Dictionary with values
+    :rtype: Dict[str, Any]
+    """
+    k, v = key_col_name, value_col_name
+    return {x[k]: x[v] for x in df.select(k, v).collect()}</code></pre>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
