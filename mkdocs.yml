@@ -20,7 +20,7 @@ plugins:
             show_source: true
 
 nav:
-  - Quin: index.md
+  - Home: index.md
   - API Docs: reference/SUMMARY.md
 
 markdown_extensions:
